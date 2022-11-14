@@ -273,7 +273,7 @@ class RoundGenerator:
         """ Add score for winners """
         self.add_score(self.round_view.winners_list)
         """ Save the end date time """
-        round_01.end_date_time = self.round_view.round_end_date_time
+        round_01.end_date_time = str(self.round_view.round_end_date_time)
         first_matches = self.round_view.matches
         saved_first_matches = []
         """ Reload matches to round """
@@ -324,7 +324,7 @@ class RoundGenerator:
             """ Add score for winners """
             self.add_score(self.round_view.winners_list)
             """ Mark the round as finished and update end date time """
-            current_round.end_date_time = self.round_view.round_end_date_time
+            current_round.end_date_time = str(self.round_view.round_end_date_time)
             current_round.is_round_finished = True
             current_matches = self.round_view.matches
             current_saved_matches = []

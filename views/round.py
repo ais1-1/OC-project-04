@@ -1,4 +1,6 @@
 """ Define the round view """
+from datetime import datetime
+
 from models.round import Round
 from views.helper import (
     validate_winner_entry,
@@ -33,6 +35,7 @@ class RoundView:
         self.matches = []
 
         self.display_round_prompt()
+        self.round_end_date_time = datetime.now()
         self.save_round_to_db_with_matches()
 
     def display_round_prompt(self):
@@ -82,18 +85,6 @@ class RoundView:
                         self.matches.append(match)
             self.winners_list.append(winner_to_list)
             iterations -= 1
-
-        while self.round_end_date_time.strip() == "":
-            self.round_end_date_time = input(
-                "Veuillez entrer la date "
-                + "et l'heure de la fin du tour (jj/mm/aaaa:hh:mm):"
-            )
-            if not validate_date_time(self.round_end_date_time):
-                self.round_end_date_time = ""
-            elif not validate_round_end_date(self.round_end_date_time):
-                self.round_end_date_time = ""
-            else:
-                pass
 
 
     def save_round_to_db_with_matches(self):

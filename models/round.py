@@ -51,7 +51,7 @@ class Round:
             "matches": [match.get_serialized_match() for match in self.matches],
             "is_round_finished": self.is_round_finished,
             "start_date_time": str(self.start_date_time),
-            "end_date_time": self.end_date_time,
+            "end_date_time": str(self.end_date_time),
         }
 
         return serialized_round

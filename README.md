@@ -6,7 +6,7 @@ It manages tournaments and players for a chess club.
 
 Running the project will give you access to the main menu. The main menu contains the following options :
 1. Créer un tournoi
-    This option will allow you to create a new tournament. Then the program will generate rounds and matches according to the information that are given by the user. The matches are generated following the swiss tournament system. At the end of each round, one needs to enter the winners of each match and the date and time of the end of the round.
+    This option allows you to create a new tournament. Then the program will generate rounds and matches according to the information that are given by the user. The matches are generated following the swiss tournament system. At the end of each round, one needs to enter the winners of each match and the date and time of the end of the round.
 2. Charger un tournoi en cours
     This option is to load an ongoing tournament.
 3. Ajouter des joueurs
@@ -22,7 +22,7 @@ Running the project will give you access to the main menu. The main menu contain
 
 Requirement : Python3.3 or later
 
-Open terminal at the root of the project directory, and enter the following command:
+Open a terminal at the root of the project directory, and enter the following command:
 
     python -m venv <name of the virtual environment>
 
@@ -44,9 +44,9 @@ Again, inside the project directory, in your terminal, enter the following comma
 
     pip install -r requirements.txt
 
-This will install all the required modules to run the python script. They are tinydb, flake8 and flake8-html.
+This will install all the required modules to run the application. Those are tinydb, flake8 and flake8-html.
 
-## Execute the python script
+## Launch the application
 
 In your terminal inside the project directory:
 

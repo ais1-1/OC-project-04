@@ -3,7 +3,6 @@ from views.helper import (
     validate_date,
     validate_time_control,
     validate_date_in_future,
-    prompt_quit_or_continue,
 )
 from controllers.database_handler import DatabaseHandler
 
@@ -39,7 +38,6 @@ class CreateTournamentView:
 
         self.display_tournament_menu()
         self.add_player()
-        prompt_quit_or_continue()
 
     def display_tournament_menu(self):
         """User prompt to enter tournaments' info"""
@@ -158,7 +156,6 @@ class OngoingTournamentView:
             elif not self.validate_tournament_in_list(int(self.tournament_id)):
                 self.tournament_id = ""
                 print("Entrée invalide. Veuillez choisir un id depuis le list dessus.")
-            prompt_quit_or_continue()
 
         print("Vous avez choisi", self.tournament_id, "voici les infos lieés :")
         for tournament in self.db_handler.tournaments:
@@ -178,7 +175,6 @@ class OngoingTournamentView:
                     f"Control du temps : {tournament.time_control} \nDescription : {tournament.description}"
                 )
                 return tournament
-                prompt_quit_or_continue()
 
     def validate_tournament_in_list(self, tournament_id: int):
         """Validate the tournament selected by the user is an unfinished one.

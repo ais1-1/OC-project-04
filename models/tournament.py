@@ -43,7 +43,7 @@ class Tournament:
 
     def __str__(self):
         """Used in print"""
-        return f"Tournament {self.name} take place at {self.location} on {self.date}"
+        return f"Tournoi {self.name}, Lieu : {self.location}, le {self.date}"
 
     def get_serialized_tournament(self):
         """Serialize tournament

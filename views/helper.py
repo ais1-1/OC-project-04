@@ -156,7 +156,7 @@ def display_prompt_after_selection():
         user_input = int(
             input(
                 "Si vous voulez quitter l'application tapez 1 ;\n"
-                + "Pour retourner dans le menu d'avant tapez 2 ;\nVotre choix : "
+                + "Pour retourner dans le menu précédent tapez 2 ;\nVotre choix : "
             )
         )
     except Exception:
@@ -169,21 +169,3 @@ def display_prompt_after_selection():
         user_input = 2
         return user_input
 
-
-def prompt_quit_or_continue():
-    """Display prompt to quit or continue"""
-    user_input = ""
-    try:
-        user_input = int(
-            input(
-                "Si vous voulez quitter l'application tapez 1 ;\n Pour continuer une touche ;\nVotre choix : "
-            )
-        )
-    except Exception:
-        print("")
-
-    if user_input == 1:
-        """Quit the program"""
-        sys.exit()
-    else:
-        pass

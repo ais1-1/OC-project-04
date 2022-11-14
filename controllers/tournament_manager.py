@@ -87,11 +87,11 @@ class TournamentManager:
     def display_final_winners_list(self):
         """Display final list of players with their scores"""
         print("*******************")
-        print("Voici la liste final des joueurs dans l'ordre leur score : ")
+        print("VVoici les résultats du tournoi : ")
         for player in self.round_generator.ordered_players_in_tournament:
             print(
                 f"{player} ({player.player_id}), classement : {player.ranking},"
-                + " Score dans le tournoi : {player.total_score}"
+                + " Score dans ce tournoi : {player.total_score}"
             )
 
     def update_tournament_in_db(self, tournament: Tournament):
@@ -245,11 +245,11 @@ class OngoingTournamentManager:
     def display_final_winners_list(self):
         """Display final list of players with their scores"""
         print("*******************")
-        print("Voici la liste final des joueurs dans l'ordre leur score : ")
+        print("Voici les résultats du tournoi : ")
         for player in self.round_generator.ordered_players_in_tournament:
             print(
                 f"{player} ({player.player_id}), classement : {player.ranking},"
-                + " Score dans le tournoi : {player.total_score}"
+                + " Score dans ce tournoi : {player.total_score}"
             )
 
     def update_tournament(self):

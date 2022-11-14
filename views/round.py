@@ -4,7 +4,6 @@ from views.helper import (
     validate_winner_entry,
     validate_date_time,
     validate_round_end_date,
-    prompt_quit_or_continue,
 )
 from controllers.database_handler import DatabaseHandler
 
@@ -82,7 +81,6 @@ class RoundView:
                         match = self.db_handler.get_deserialized_match(serialized_match)
                         self.matches.append(match)
             self.winners_list.append(winner_to_list)
-            prompt_quit_or_continue()
             iterations -= 1
 
         while self.round_end_date_time.strip() == "":
@@ -97,7 +95,6 @@ class RoundView:
             else:
                 pass
 
-        prompt_quit_or_continue()
 
     def save_round_to_db_with_matches(self):
         """Save round to database with the generated matches."""

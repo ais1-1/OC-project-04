@@ -5,27 +5,27 @@ from views.helper import display_prompt_after_selection, prompt_quit_or_continue
 
 REPORTMENU_OPTIONS = {
     1: "Les joueurs",
-    2: "Les tournoi",
+    2: "Les tournois",
     3: "Quitter l'application",
 }
 
 PLAYER_REPORT_OPTIONS = {
     1: "Par ordre alphabétique",
     2: "Par classement",
-    3: "Retourner vers le vue d'avant",
+    3: "Retourner au menu précédent",
 }
 
 TOURNAMENT_REPORT_MAIN_OPTIONS = {
-    1: "Liste de tous les tournoi",
+    1: "Liste de tous les tournois",
     2: "Rapport spécifique à un tournoi",
-    3: "Retourner vers le vue d'avant",
+    3: "Retourner au menu précédent",
 }
 
 TOURNAMENT_REPORT_OPTIONS = {
     1: "Liste de tous les joueurs du tournoi",
     2: "Liste de tous les tours du tournoi",
     3: "Liste de tous les matchs du tournoi",
-    4: "Retourner vers le vue d'avant",
+    4: "Retourner au menu précédent",
 }
 
 
@@ -214,14 +214,13 @@ class TournamentReportMenuView:
         choice = ""
 
         try:
-            print("Saisissez l'id d'un tournoi pour faire le rapport liée")
-            print("Voici la liste de tournoi dans le base de donnée avec leur id")
+            print("Saisissez l'id d'un tournoi pour afficher son rapport")
+            print("Voici la liste des tournois avec leur id dans la base de donnée")
             for tournament in self.db_handler.tournaments:
                 print(f"({tournament.id}) {tournament}")
 
             choice = int(input("Saisissez l'id d'un tournoi : "))
             """ Ask if quit or continue """
-            prompt_quit_or_continue()
         except Exception:
             print("Veuillez entrer un id valide !")
             self.display_tournament_selection_menu()
@@ -336,7 +335,7 @@ class TournamentReportMenuView:
         for round in self.db_handler.rounds:
             if round.tournament_id == self.tournament_id:
                 print(f"{round.round_name}; numéro de tour : {round.round_number} ;")
-                print("    Matches dans le tour : ")
+                print("    Matchs dans le tour : ")
                 for match in round.matches:
                     print(f"        {match}")
         print("\n\n")

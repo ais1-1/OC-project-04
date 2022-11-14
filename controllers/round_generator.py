@@ -33,6 +33,7 @@ class RoundGenerator:
         round_view - RoundView object
         rounds - list of Round objects in the tournament
         number_of_matches_in_round - number of matches in a round
+        final_result - sorted list of players according to their scores in the tournament
 
         Init the methods:
         handle_odd_number_of_players - add a nobody player
@@ -54,7 +55,7 @@ class RoundGenerator:
 
         self.round_view = None
         self.rounds = []
-        self.ordered_players_in_tournament = []
+        self.final_result = []
 
         if self.load_from_first_match:
             """Load from first round and first match"""
@@ -79,6 +80,7 @@ class RoundGenerator:
                 starting_match=self.starting_match_number,
             )
 
+        self.final_result = self.sort_player_by_score(self.list_of_players)
         self.delete_no_player()
 
     def sort_player_by_ranking(self, players_list: list):
@@ -137,7 +139,6 @@ class RoundGenerator:
         Returns:
         list - list of matches in the first round"""
         players = self.sort_player_by_ranking(self.list_of_players)
-        self.ordered_players_in_tournament = players
         first_matches = []
 
         half_the_total_players = int(len(self.list_of_players) / 2)
@@ -192,7 +193,6 @@ class RoundGenerator:
         list - list of matches in the next round"""
 
         players = self.sort_player_by_score(self.list_of_players)
-        self.ordered_players_in_tournament = players
         has_a_match = {}
         for player in players:
             has_a_match[player] = False

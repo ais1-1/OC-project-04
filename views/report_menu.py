@@ -1,7 +1,7 @@
 """ Define report menu views"""
 import sys
 from controllers.database_handler import DatabaseHandler
-from views.helper import display_prompt_after_selection, prompt_quit_or_continue
+from views.helper import display_prompt_after_selection
 
 REPORTMENU_OPTIONS = {
     1: "Les joueurs",
@@ -370,6 +370,6 @@ class TournamentReportMenuView:
         List of player objects"""
         winner_list = []
         for w in winners:
-            winner = self.get_player_object_from_id(w)
+            winner = self.db_handler.get_player_object_from_id(w)
             winner_list.append(winner)
         return winner_list

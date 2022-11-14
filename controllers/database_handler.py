@@ -370,7 +370,7 @@ class DatabaseHandler:
             if tournament.id == tournament_id:
                 list_of_players = tournament.list_of_players
         return list_of_players
-    
+
     def get_player_object_from_id(self, player_id: int):
         """Get player object from player_id
 

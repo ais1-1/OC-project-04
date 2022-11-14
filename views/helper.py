@@ -168,4 +168,3 @@ def display_prompt_after_selection():
     else:
         user_input = 2
         return user_input
-

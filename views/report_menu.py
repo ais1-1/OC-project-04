@@ -214,7 +214,10 @@ class TournamentReportMenuView:
                 print("")
                 print(" Résultats du tournoi :")
                 for player in tournament.final_result:
-                    print(f"   {player} ({player.player_id}), classement : {player.ranking}, Score : {player.total_score}")
+                    print(
+                        f"   {player} ({player.player_id}), classement : {player.ranking},"
+                        + f" Score : {player.total_score}"
+                    )
             print("------")
             i += 1
 
@@ -381,8 +384,9 @@ class TournamentReportMenuView:
             winner = self.db_handler.get_player_object_from_id(w)
             winner_list.append(winner)
         return winner_list
-    
+
     def get_printable_match_with_winners(self, match):
+        """Get winners of a match and print one by one."""
         print("")
         winner = self.get_winners_from_list(match.winner)
         print(f"{match} ; gagnant/s :")

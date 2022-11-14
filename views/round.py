@@ -2,11 +2,7 @@
 from datetime import datetime
 
 from models.round import Round
-from views.helper import (
-    validate_winner_entry,
-    validate_date_time,
-    validate_round_end_date,
-)
+from views.helper import validate_winner_entry
 from controllers.database_handler import DatabaseHandler
 
 
@@ -85,7 +81,6 @@ class RoundView:
                         self.matches.append(match)
             self.winners_list.append(winner_to_list)
             iterations -= 1
-
 
     def save_round_to_db_with_matches(self):
         """Save round to database with the generated matches."""

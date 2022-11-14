@@ -36,7 +36,7 @@ class Player:
 
     def __str__(self):
         """Used in print"""
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.last_name} {self.first_name}"
 
     def get_serialized_player(self):
         """Serialize player

@@ -93,7 +93,7 @@ class CreateTournamentView:
         print("Entrez l'id d'un joueur à ajouter :")
         print("Voici la liste des joueurs avec leur id -")
         for player in self.db_handler.players:
-            print(f"{player.first_name} {player.last_name} ({player.player_id})")
+            print(f"{player} ({player.player_id})")
         print("----------Fin de la liste--------")
 
         number_of_players = int(self.number_of_players)

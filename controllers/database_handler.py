@@ -339,7 +339,7 @@ class DatabaseHandler:
 
         Return:
         sorted_list - sorted list of players"""
-        sorted_list = sorted(players, key=lambda player: player.first_name)
+        sorted_list = sorted(players, key=lambda player: player.last_name)
         return sorted_list
 
     def order_player_by_rank(self, players: list):

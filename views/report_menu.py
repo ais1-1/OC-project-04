@@ -184,28 +184,37 @@ class TournamentReportMenuView:
             print(
                 f"{i}. Nom : {tournament.name}, Lieu : {tournament.location}, Date : {tournament.date}\n"
             )
-            print(" Liste des joueurs :")
+            print("")
+            print("Liste des joueurs :")
             for player in tournament.list_of_players:
                 print(f"    {player}")
-
-            print(" Nombre de tours : ")
+            print("")
+            print("Nombre de tours : ", tournament.number_of_rounds)
             for round in self.db_handler.rounds:
                 if round.tournament_id == tournament.id:
+                    print("")
                     print(
-                        f"    {round.round_name}, Nombre de tour : {round.round_number},"
+                        f"{round.round_name}, Nombre de tour : {round.round_number},"
                         + f" Tour terminé : {round.is_round_finished}"
                     )
-                    print("      Matches :")
+                    print("")
+                    print("Matches :")
                     for match in self.db_handler.matches:
                         if (
                             match.tournament_id == tournament.id
                             and match.round_number == round.round_number
                         ):
-                            print("      ", match)
+                            self.get_printable_match_with_winners(match)
+            print("")
             print(
-                f" Control du temps : {tournament.time_control}, Description : {tournament.description}\n"
-                + f" Tournoi fini : {tournament.is_finished}"
+                f"Control du temps : {tournament.time_control}, Description : {tournament.description}\n"
+                + f"Tournoi fini : {tournament.is_finished}"
             )
+            if tournament.is_finished:
+                print("")
+                print(" Résultats du tournoi :")
+                for player in tournament.final_result:
+                    print(f"   {player} ({player.player_id}), classement : {player.ranking}, Score : {player.total_score}")
             print("------")
             i += 1
 
@@ -334,10 +343,12 @@ class TournamentReportMenuView:
         print("\n Les tours du tournoi", self.tournament_id, "\n\n")
         for round in self.db_handler.rounds:
             if round.tournament_id == self.tournament_id:
+                print("")
                 print(f"{round.round_name}; numéro de tour : {round.round_number} ;")
-                print("    Matchs dans le tour : ")
+                print("")
+                print("Matchs dans le tour : ")
                 for match in round.matches:
-                    print(f"        {match}")
+                    self.get_printable_match_with_winners(match)
         print("\n\n")
         """ Ask if quit or go back """
         final_choice = display_prompt_after_selection()
@@ -350,10 +361,7 @@ class TournamentReportMenuView:
         print("\n Les matches du tournoi", self.tournament_id, "\n\n")
         for match in self.db_handler.matches:
             if match.tournament_id == self.tournament_id:
-                winner = self.get_winners_from_list(match.winner)
-                print(f"{match} ; gagnant/s :")
-                for w in winner:
-                    print(" ", w)
+                self.get_printable_match_with_winners(match)
         print("\n\n")
         """ Ask if quit or go back """
         final_choice = display_prompt_after_selection()
@@ -373,3 +381,10 @@ class TournamentReportMenuView:
             winner = self.db_handler.get_player_object_from_id(w)
             winner_list.append(winner)
         return winner_list
+    
+    def get_printable_match_with_winners(self, match):
+        print("")
+        winner = self.get_winners_from_list(match.winner)
+        print(f"{match} ; gagnant/s :")
+        for i in range(0, len(winner)):
+            print(" ", winner[i])

@@ -16,6 +16,7 @@ class Tournament:
         time_control="",
         description="",
         is_finished=False,
+        final_result=[],
     ):
         """Init the following attributes:
         -id: Tournament's unique id, 0 by default
@@ -29,6 +30,7 @@ class Tournament:
             a tournament (bullet, blitz or rapid)
         -description: general remarks of the tournament director
         -is_finished: boolean to indicate end of the tournament
+        -final_result: sorted list of players according to their ranking and then by score
         """
         self.id = id
         self.name = name
@@ -40,6 +42,7 @@ class Tournament:
         self.time_control = time_control
         self.description = description
         self.is_finished = is_finished
+        self.final_result = final_result
 
     def __str__(self):
         """Used in print"""
@@ -65,6 +68,7 @@ class Tournament:
             "time_control": self.time_control,
             "description": self.description,
             "is_finished": self.is_finished,
+            "final_result": self.final_result,
         }
 
         return serialized_tournament

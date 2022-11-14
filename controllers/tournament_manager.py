@@ -76,6 +76,7 @@ class TournamentManager:
             create_tournament_view.description,
             create_tournament_view.number_of_players,
             self.players,
+
         )
 
         """ Save tournament to db """
@@ -104,6 +105,13 @@ class TournamentManager:
         self.db_handler.tournaments_table.update(
             {"is_finished": True}, doc_ids=[tournament.id]
         )
+        tournament.final_result = self.round_generator.final_result
+        final_result_serialized = []
+        for player in self.tournament.final_result:
+            serialized_player = player.get_serialized_player()
+            final_result_serialized.append(serialized_player)
+
+        self.db_handler.tournaments_table.update({"final_result": final_result_serialized}, doc_ids=[tournament.id])
         rounds_in_tournament = self.db_handler.rounds_table.search(
             self.db_handler.QueryItem.tournament_id == tournament.id
         )
@@ -258,6 +266,12 @@ class OngoingTournamentManager:
         self.db_handler.tournaments_table.update(
             {"is_finished": True}, doc_ids=[self.tournament.id]
         )
+        self.tournament.final_result = self.round_generator.final_result
+        final_result_serialized = []
+        for player in self.tournament.final_result:
+            serialized_player = player.get_serialized_player()
+            final_result_serialized.append(serialized_player)
+        self.db_handler.tournaments_table.update({"final_result": final_result_serialized}, doc_ids=[self.tournament.id])
         rounds_in_tournament = self.db_handler.rounds_table.search(
             self.db_handler.QueryItem.tournament_id == self.tournament.id
         )

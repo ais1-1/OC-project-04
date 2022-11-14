@@ -165,6 +165,7 @@ class DatabaseHandler:
         description - description for the tournament
         number_of_players - number of players in the tournament
         players - list of Players
+        final_result - sorted list of players according to their score at the end of the tournament
 
         Return:
         tournament(Tournament) - tournament object"""
@@ -178,6 +179,7 @@ class DatabaseHandler:
             time_control=time_control,
             description=description,
             is_finished=False,
+            final_result=[],
         )
         return tournament
 
@@ -224,6 +226,10 @@ class DatabaseHandler:
             serialized_tournament["time_control"],
             serialized_tournament["description"],
             serialized_tournament["is_finished"],
+            [
+                self.get_deserialized_player(player)
+                for player in serialized_tournament["final_result"]
+            ],
         )
         return tournament
 

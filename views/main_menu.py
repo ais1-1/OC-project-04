@@ -1,4 +1,11 @@
 """ Define the main menu view """
+import sys
+
+from views.report_menu import ReportMenuView
+
+from controllers.tournament_manager import TournamentManager, OngoingTournamentManager
+from controllers.player_creator import PlayerCreator
+from controllers.player_updater import PlayerUpdater
 
 
 MENU_OPTIONS = {
@@ -56,17 +63,23 @@ class MainMenuView:
                 )
 
         if self.choice == 1:
-            return 1
+            """Create tournament"""
+            TournamentManager()
         elif self.choice == 2:
-            return 2
+            """Load ongoing tournament"""
+            OngoingTournamentManager()
         elif self.choice == 3:
-            return 3
+            """Save new player to database"""
+            PlayerCreator()
         elif self.choice == 4:
-            return 4
+            """Update player's ranking"""
+            PlayerUpdater()
         elif self.choice == 5:
-            return 5
+            """Generate reports"""
+            ReportMenuView()
         elif self.choice == 6:
-            return 6
+            """Exit the program"""
+            sys.exit()
         else:
             print(
                 "Veuillez entrer un nombre entre 1 et 6" + " pour indiquer votre choix"

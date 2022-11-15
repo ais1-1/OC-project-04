@@ -97,7 +97,7 @@ def validate_round_end_date(date_time_input: str):
             return True
     except Exception:
         print(
-            "La date est incorrect, elle est dans le passé. Veuillez entrer une date valide."
+            "La date est incorrecte, elle est dans le passé. Veuillez entrer une date valide."
         )
         return False
 
@@ -122,7 +122,7 @@ def validate_time_control(time_control_input: str):
     else:
         if len(time_control_input) > 0:
             print(
-                "Entrée incorrect. " + "Veuillez entrez Bullet, Blitz ou Coup Rapide."
+                "Entrée incorrecte. " + "Veuillez entrez Bullet, Blitz ou Coup Rapide."
             )
         return False
 
@@ -155,8 +155,8 @@ def display_prompt_after_selection():
     try:
         user_input = int(
             input(
-                "Si vous voulez quitter l'application tapez 1 ;\n"
-                + "Pour retourner dans le menu précédent tapez 2 ;\nVotre choix : "
+                "Pour quitter l'application tapez 1 ;\n"
+                + "Pour retourner au menu précédent tapez 2 ;\nVotre choix : "
             )
         )
     except Exception:

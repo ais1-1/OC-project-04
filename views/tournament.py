@@ -148,14 +148,14 @@ class OngoingTournamentView:
                 print(f"{tournament.name} : {tournament.id}")
                 self.ongoing_tournaments.append(tournament)
         while not self.tournament_id.isnumeric():
-            self.tournament_id = input("L'id de tournoi a charger : ")
+            self.tournament_id = input("L'id du tournoi a charger : ")
 
             if self.tournament_id.strip() == "" or not self.tournament_id.isnumeric():
                 self.tournament_id = ""
                 print("Entrée invalide.")
             elif not self.validate_tournament_in_list(int(self.tournament_id)):
                 self.tournament_id = ""
-                print("Entrée invalide. Veuillez choisir un id depuis le list dessus.")
+                print("Entrée invalide. Veuillez choisir un id depuis la liste ci-dessus.")
 
         print("Vous avez choisi", self.tournament_id, "voici les infos lieés :")
         for tournament in self.db_handler.tournaments:
@@ -179,7 +179,7 @@ class OngoingTournamentView:
                 for player in tournament.list_of_players:
                     print(" ", player)
                 print(
-                    f"Control du temps : {tournament.time_control} \nDescription : {tournament.description}"
+                    f"Contrôl du temps : {tournament.time_control} \nDescription : {tournament.description}"
                 )
                 return tournament
 

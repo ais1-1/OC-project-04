@@ -46,13 +46,13 @@ class RoundView:
 
     def display_round_prompt(self):
         """Diplay generated matches and prompt for winners and end date time."""
-        print(f"--------MATCHS POUR TOUR {self.round.round_number}--------")
+        print(f"--------MATCHS POUR LE TOUR {self.round.round_number}--------")
         for match in self.round.matches:
             match_number = self.round.matches.index(match) + 1
             print("****Match " + str(match_number) + "****")
             for player in match.pair_of_players:
                 print(player, " (", player.player_id, ")")
-        print("------FIN DU MATCH-----")
+        print("------FIN DE LA LISTE DES MATCHS-----")
 
         iterations = self.number_of_matches - self.match_number_to_load
         while iterations > 0:
@@ -63,7 +63,7 @@ class RoundView:
                 winner = input(
                     "Veuillez entrer l'id du gagnant du match "
                     + match_number_str
-                    + "\n(en cas de match nul, entrez l'ids"
+                    + "\n(en cas de match nul, entrez l'id"
                     + " des deux joueurs séparés d'un éspace) : "
                 )
                 while not validate_winner_entry(

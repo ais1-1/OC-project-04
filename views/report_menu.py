@@ -178,7 +178,7 @@ class TournamentReportMenuView:
 
     def display_all_tournaments(self):
         """Display all tournaments in db"""
-        print("-------Liste de tous les tournoi---------")
+        print("-------Liste de tous les tournois---------")
         i = 1
         for tournament in self.db_handler.tournaments:
             print(
@@ -194,11 +194,11 @@ class TournamentReportMenuView:
                 if round.tournament_id == tournament.id:
                     print("")
                     print(
-                        f"{round.round_name}, Nombre de tour : {round.round_number},"
+                        f"{round.round_name}, Numéro du tour : {round.round_number},"
                         + f" Tour terminé : {round.is_round_finished}"
                     )
                     print("")
-                    print("Matches :")
+                    print("Matchs :")
                     for match in self.db_handler.matches:
                         if (
                             match.tournament_id == tournament.id
@@ -241,7 +241,7 @@ class TournamentReportMenuView:
         if self.validate_tournament_in_db(choice):
             self.tournament_id = choice
         else:
-            print("Entrée invalide. Veuillez choisir un id depuis le list donnée.")
+            print("Entrée invalide. Veuillez choisir un id depuis la liste donnée.")
             self.display_tournament_selection_menu()
 
         """ Display the menu to choose which report to be generated """
@@ -347,7 +347,7 @@ class TournamentReportMenuView:
         for round in self.db_handler.rounds:
             if round.tournament_id == self.tournament_id:
                 print("")
-                print(f"{round.round_name}; numéro de tour : {round.round_number} ;")
+                print(f"{round.round_name}; Numéro de tour : {round.round_number} ;")
                 print("")
                 print("Matchs dans le tour : ")
                 for match in round.matches:
@@ -361,7 +361,7 @@ class TournamentReportMenuView:
 
     def display_matches(self):
         """Display matches in the tournament"""
-        print("\n Les matches du tournoi", self.tournament_id, "\n\n")
+        print("\n Les matchs du tournoi", self.tournament_id, "\n\n")
         for match in self.db_handler.matches:
             if match.tournament_id == self.tournament_id:
                 self.get_printable_match_with_winners(match)

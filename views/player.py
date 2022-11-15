@@ -41,7 +41,7 @@ class PlayerView:
             self.first_name = input("Prénom : ").capitalize()
 
         while self.date_of_birth.strip() == "":
-            self.date_of_birth = input("Date de naissence (dd/mm/aaaa) : ")
+            self.date_of_birth = input("Date de naissance (dd/mm/aaaa) : ")
             if not validate_date(self.date_of_birth):
                 self.date_of_birth = ""
             elif not validate_date_in_past(self.date_of_birth):
@@ -60,7 +60,7 @@ class PlayerView:
                 or not self.ranking.isnumeric()
             ):
                 self.ranking = ""
-                print("Entrée invalide. Veuillez saissir un chiffre positif.")
+                print("Entrée invalide. Veuillez saisir un chiffre positif.")
             else:
                 pass
 
@@ -92,6 +92,6 @@ class PlayerView:
                 or not self.new_ranking.isnumeric()
             ):
                 self.new_ranking = ""
-                print("Entrée invalide.Veuillez saissir un chiffre positif.")
+                print("Entrée invalide.Veuillez saisir un chiffre positif.")
             else:
                 pass

@@ -164,16 +164,20 @@ class TournamentReportMenuView:
         if option == 1:
             """Show the list of all the tournament"""
             self.display_all_tournaments()
+            final_choice = display_prompt_after_selection()
         elif option == 2:
             """Display list of tournaments to choose one from it"""
             self.display_tournament_selection_menu()
         elif option == 3:
             """Go back to the previous menu"""
             ReportMenuView()
-
         else:
             """Show a message in the case of invalid entry"""
             print("!!!Choix invalide. Veuillez entrer un nombre entre 1 et 3 !!!")
+            self.display_tournament_main_menu()
+
+        if final_choice == 2:
+            """Go back to the previous menu"""
             self.display_tournament_main_menu()
 
     def display_all_tournaments(self):
@@ -350,8 +354,12 @@ class TournamentReportMenuView:
                 print(f"{round.round_name}; Numéro de tour : {round.round_number} ;")
                 print("")
                 print("Matchs dans le tour : ")
-                for match in round.matches:
-                    self.get_printable_match_with_winners(match)
+                for match in self.db_handler.matches:
+                    if (
+                        match.tournament_id == round.tournament_id
+                        and match.round_number == round.round_number
+                    ):
+                        self.get_printable_match_with_winners(match)
         print("\n\n")
         """ Ask if quit or go back """
         final_choice = display_prompt_after_selection()

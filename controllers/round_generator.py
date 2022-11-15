@@ -1,5 +1,6 @@
 """ Define the round generator controller """
 from operator import attrgetter
+from math import ceil
 
 from models.player import Player
 from models.round import Round
@@ -203,55 +204,69 @@ class RoundGenerator:
 
         matches = []
 
-        """Special case to match the last player with the closest possible one.
-        This makes sure that in case of odd number of players,
-        a player cannot be left apart more than once. """
-        if len(self.list_of_players) % 2 != 0:
-            last_player = players[-1]
-            has_a_match[last_player] = True
-            reversed_players = players
-            reversed_players.reverse()
-            for opponent in reversed_players:
-                if (
-                    has_a_match[opponent] is False
-                    and opponent.player_id not in last_player.opponents_list
-                ):
-                    player_02 = opponent
-                    has_a_match[player_02] = True
-                    last_player.opponents_list.append(player_02.player_id)
-                    player_02.opponents_list.append(last_player.player_id)
-                    match_name = Match(
-                        tournament_id=self.tournament_id,
-                        round_number=-1,
-                        pair_of_players=(last_player, player_02),
-                        winner=[],
-                    )
-                    matches.append(match_name)
-                    break
-
         for i in range(0, int(len(players))):
             player_01 = players[i]
-            if has_a_match[player_01] is False:
-                has_a_match[player_01] = True
-                for opponent in players:
-                    if (
-                        has_a_match[opponent] is False
-                        and opponent.player_id not in player_01.opponents_list
-                    ):
-                        player_02 = opponent
-                        has_a_match[player_02] = True
-                        player_01.opponents_list.append(player_02.player_id)
-                        player_02.opponents_list.append(player_01.player_id)
-                        match_name = Match(
-                            tournament_id=self.tournament_id,
-                            round_number=-1,
-                            pair_of_players=(player_01, player_02),
-                            winner=[],
-                        )
-                        matches.append(match_name)
-                        break
+            match_generation = self.generate_match(
+                player_01, players, has_a_match, matches, False
+            )
+            matches = match_generation[0]
+            has_a_match = match_generation[1]
 
+        """ In case the previous attempt failed to assign matches to players """
+        number_of_matches_in_round = ceil(len(self.list_of_players) / 2)
+        if number_of_matches_in_round > len(matches):
+            for i in range(0, int(len(players))):
+                player_01 = players[i]
+                match_generation = self.generate_match(
+                    player_01, players, has_a_match, matches, True
+                )
+                matches = match_generation[0]
+                has_a_match = match_generation[1]
         return matches
+
+    def generate_match(
+        self,
+        player_01: Player,
+        sorted_players: list,
+        has_a_match: dict,
+        matches: list,
+        force_pairing=False,
+    ):
+        """Generate matches for a round
+        Args:
+        player_01 - first player of the potential match
+        sorted_players - sorted list of players by ranking and score
+        has_a_match - dictionary with players as keys and boolean (has a match or not) as values
+        matches - list of matches of a round
+        force pairing - if remaining players without matches, force pairing
+
+        Returns:
+        matches - list of matches in the round
+        has_a_match - dictionary with players as keys and boolean (has a match or not) as values"""
+        if has_a_match[player_01] is False:
+            for opponent in sorted_players:
+                if (
+                    opponent is not player_01
+                    and has_a_match[opponent] is False
+                    and (
+                        opponent.player_id not in player_01.opponents_list
+                        or force_pairing
+                    )
+                ):
+                    player_02 = opponent
+                    has_a_match[player_01] = True
+                    has_a_match[player_02] = True
+                    player_01.opponents_list.append(player_02.player_id)
+                    player_02.opponents_list.append(player_01.player_id)
+                    match = Match(
+                        tournament_id=self.tournament_id,
+                        round_number=-1,
+                        pair_of_players=(player_01, player_02),
+                        winner=[],
+                    )
+                    matches.append(match)
+                    break
+        return matches, has_a_match
 
     def create_first_round_and_save(self, starting_match: int):
         """Generate first round and save it to db

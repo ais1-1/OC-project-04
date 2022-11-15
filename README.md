@@ -64,4 +64,4 @@ In your terminal at the root of the project directory enter the following comman
 
     flake8 --format=html --htmldir=flake-report
 
-This will generate new html flake8 reports inside the directory called flake-report. The file setup.cfg in the project directory has set maximum line length to 119 and it excludes .git, .gitignore, \__pycache__, env and venv. If your venv is named differently than env or venv, you can its name in the setup.cfg.
+This will generate new html flake8 reports inside the directory called flake-report. The file setup.cfg in the project directory has set maximum line length to 119 and it excludes .git, .gitignore, \_\_pycache\_\_, env and venv. If your venv is named differently than env or venv, you can its name in the setup.cfg.

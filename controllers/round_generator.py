@@ -320,11 +320,12 @@ class RoundGenerator:
                 tournament_id=self.tournament_id,
                 matches=current_matches,
             )
-            print("debug", starting_match)
             """ Create RoundView object for the round """
             self.round_view = RoundView(
                 current_round, self.number_of_matches_in_round, starting_match
             )
+            """ Reset the starting match value """
+            starting_match = 0
             current_round = self.round_view.round
             """ Add score for winners """
             self.add_score(self.round_view.winners_list)

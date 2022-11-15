@@ -54,7 +54,7 @@ This will install all the required modules to run the application. Those are tin
 
 ## Launch the application
 
-In your terminal inside the project directory:
+With the virtual environment activated, in your terminal inside the project directory:
 
     python main.py
 

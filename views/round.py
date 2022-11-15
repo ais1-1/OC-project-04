@@ -31,6 +31,16 @@ class RoundView:
         self.matches = []
 
         self.display_round_prompt()
+
+        """ Get winners of the matches in the round and saved matches in the round """
+        for match in self.db_handler.matches:
+            if (
+                match.tournament_id == self.round.tournament_id
+                and match.round_number == self.round.round_number
+            ):
+                self.winners_list.append(match.winner)
+                self.matches.append(match)
+
         self.round_end_date_time = datetime.now()
         self.save_round_to_db_with_matches()
 
@@ -78,7 +88,6 @@ class RoundView:
                             self.round.matches[match_number - 1]
                         )
                         match = self.db_handler.get_deserialized_match(serialized_match)
-                        self.matches.append(match)
             self.winners_list.append(winner_to_list)
             iterations -= 1
 

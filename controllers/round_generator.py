@@ -186,6 +186,10 @@ class RoundGenerator:
                 player = self.get_player_object_from_id(int(winner[0]))
                 player.total_score = player.total_score + 1.0
 
+        for tournament in self.db_handler.tournaments:
+            if tournament.id == self.tournament_id:
+                self.update_players_score_in_tournament(tournament)
+
     def generate_next_round(self):
         """Generate next round according to swiss system
 
@@ -316,6 +320,7 @@ class RoundGenerator:
                 tournament_id=self.tournament_id,
                 matches=current_matches,
             )
+            print("debug", starting_match)
             """ Create RoundView object for the round """
             self.round_view = RoundView(
                 current_round, self.number_of_matches_in_round, starting_match
@@ -351,3 +356,14 @@ class RoundGenerator:
             self.rounds.append(current_round)
             """ Load rounds again to the db_handler list"""
             self.db_handler.load_deserialized_rounds()
+
+    def update_players_score_in_tournament(self, tournament):
+        """Update players list in the tournament with their score"""
+        tournament.list_of_players = self.list_of_players
+        players_serialized = []
+        for player in self.list_of_players:
+            serialized_player = player.get_serialized_player()
+            players_serialized.append(serialized_player)
+        self.db_handler.tournaments_table.update(
+            {"list_of_players": players_serialized}, doc_ids=[tournament.id]
+        )

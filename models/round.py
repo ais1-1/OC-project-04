@@ -35,7 +35,7 @@ class Round:
 
     def __str__(self):
         """Used in print"""
-        string = f"{self.round_name} {self.round_number} with matches {self.matches}"
+        string = f"{self.round_name} {self.round_number}"
         return string
 
     def get_serialized_round(self):

@@ -162,10 +162,17 @@ class OngoingTournamentView:
             if int(self.tournament_id) == tournament.id:
                 print(
                     f"Nom du tournoi : {tournament.name} \nLieu : {tournament.location} \n"
-                    + "Date : {tournament.date} \nNombre de tours : {tournament.number_of_rounds} \nListe de tours :"
+                    + f"Date : {tournament.date} \nNombre de tours : {tournament.number_of_rounds} \nListe de tours :"
                 )
-                for round in tournament.list_of_rounds:
-                    print(" ", round)
+                for round in self.db_handler.rounds:
+                    if round.tournament_id == tournament.id:
+                        print(" ", round, "avec les matchs :")
+                        for match in self.db_handler.matches:
+                            if (
+                                round.tournament_id == match.tournament_id
+                                and round.round_number == match.round_number
+                            ):
+                                print(match)
                 print(
                     f"Nombre de joueurs : {len(tournament.list_of_players)} \nListe de Joueurs :"
                 )

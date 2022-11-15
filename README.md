@@ -64,5 +64,4 @@ In your terminal at the root of the project directory enter the following comman
 
     flake8 --max-line-length=119 --format=html --htmldir=flake-report
 
-This will generate a directory called flake-report. The report in the html form will be stored inside.
-
+This will generate new html flake8 reports inside the directory called flake-report.
